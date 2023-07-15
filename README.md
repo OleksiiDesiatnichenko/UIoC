@@ -126,11 +126,11 @@ interface IMyType { ... }
 
 // Specify resolve type
 [Type(typeof(IMyType))] 
-private class MyTypeC : IMyType { ... }
+class MyTypeC : IMyType { ... }
 
 // Specify resolve type and resolve name
 [Singleton(typeof(IMyType), "MySingleton")] 
-private class MyTypeD : IMyType { ... }
+class MyTypeD : IMyType { ... }
 ```
 
 ### Create type without registration
