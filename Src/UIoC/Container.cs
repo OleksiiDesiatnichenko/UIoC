@@ -84,8 +84,9 @@ namespace UIoC {
         try {
           var parameters = ctor
             .GetParameters()
-            .Select(p =>
-              Get(p.ParameterType, (p.GetCustomAttributes(typeof(ResolveNameAttribute), false).FirstOrDefault() as ResolveNameAttribute)?.ResolveName))
+            .Select(p => p.HasDefaultValue
+              ? p.DefaultValue
+              : Get(p.ParameterType, (p.GetCustomAttributes(typeof(ResolveNameAttribute), false).FirstOrDefault() as ResolveNameAttribute)?.ResolveName))
             .ToArray();
           return ctor.Invoke(parameters);
         }
