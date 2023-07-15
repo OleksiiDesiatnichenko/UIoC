@@ -1,6 +1,6 @@
 # UIoC Container
 
-The UIoC is a lightweight dependency injection container with base functionality for the .NET Framework.
+The UIoC is a lightweight dependency injection container with basic functionality for the .NET Framework.
 
 ## Installation
 
