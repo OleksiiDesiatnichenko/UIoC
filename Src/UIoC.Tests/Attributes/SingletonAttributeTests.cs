@@ -32,15 +32,15 @@ namespace UIoC.Tests.Attributes {
 
       var c1 = (I)container.Get(typeof(C1), null);
       Assert.IsNotNull(c1);
-      Assert.AreEqual(c1.StrProp, new C1().StrProp);
+      Assert.AreEqual(new C1().StrProp, c1.StrProp);
 
       c1.StrProp += "new";
-      Assert.AreEqual(c1.StrProp, new C1().StrProp + "new");
+      Assert.AreEqual(new C1().StrProp + "new", c1.StrProp);
 
 
       var c2 = (I)container.Get(typeof(C1), null);
       Assert.IsNotNull(c2);
-      Assert.AreEqual(c2.StrProp, new C1().StrProp + "new");
+      Assert.AreEqual(new C1().StrProp + "new", c2.StrProp);
 
       Assert.AreEqual(c1, c2);
     }
@@ -52,7 +52,7 @@ namespace UIoC.Tests.Attributes {
 
       var c2 = (I)container.Get(typeof(I), null);
       Assert.IsNotNull(c2);
-      Assert.AreEqual(c2.StrProp, new C2().StrProp);
+      Assert.AreEqual(new C2().StrProp, c2.StrProp);
     }
 
     [TestMethod]
@@ -62,7 +62,7 @@ namespace UIoC.Tests.Attributes {
 
       var c3 = (I)container.Get(typeof(C3), "C3");
       Assert.IsNotNull(c3);
-      Assert.AreEqual(c3.StrProp, new C3().StrProp);
+      Assert.AreEqual(new C3().StrProp, c3.StrProp);
     }
   }
 }

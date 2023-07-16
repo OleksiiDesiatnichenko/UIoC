@@ -28,7 +28,7 @@ namespace UIoC.Tests.Attributes {
       container.AddType(typeof(I1), "C1B", typeof(C1B));
       container.AddType(typeof(C2), null, typeof(C2));
 
-      Assert.AreEqual(((C2)container.Get(typeof(C2), null)).StrProp, "C1B");
+      Assert.AreEqual("C1B", ((C2)container.Get(typeof(C2), null)).StrProp);
     }
   }
 }

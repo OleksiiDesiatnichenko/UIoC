@@ -41,10 +41,10 @@ namespace UIoC.Tests.Interface {
       IContainer container = new Container();
 
       Assert.IsTrue(container.TryAddType<I1, C1A>());
-      Assert.AreEqual(((I1)container.Get(typeof(I1), null)).StrProp, new C1A().StrProp);
+      Assert.AreEqual(new C1A().StrProp, ((I1)container.Get(typeof(I1), null)).StrProp);
 
       Assert.IsFalse(container.TryAddType<I1, C1B>());
-      Assert.AreEqual(((I1)container.Get(typeof(I1), null)).StrProp, new C1A().StrProp);
+      Assert.AreEqual(new C1A().StrProp, ((I1)container.Get(typeof(I1), null)).StrProp);
     }
 
     /// <summary

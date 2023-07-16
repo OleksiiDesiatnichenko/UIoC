@@ -50,7 +50,7 @@ namespace UIoC.Tests.Interface {
 
       container.AddType<C1A>();
 
-      Assert.AreEqual(((C1A)container.Get(typeof(C1A), null)).StrProp, new C1A().StrProp);
+      Assert.AreEqual(new C1A().StrProp, ((C1A)container.Get(typeof(C1A), null)).StrProp);
     }
 
     /// <summary
@@ -69,10 +69,10 @@ namespace UIoC.Tests.Interface {
       IContainer container = new Container();
 
       container.AddType<I1, C1A>();
-      Assert.AreEqual(((I1)container.Get(typeof(I1), null)).StrProp, new C1A().StrProp);
+      Assert.AreEqual(new C1A().StrProp, ((I1)container.Get(typeof(I1), null)).StrProp);
 
       container.AddType<I1, C1B>();
-      Assert.AreEqual(((I1)container.Get(typeof(I1), null)).StrProp, new C1B().StrProp);
+      Assert.AreEqual(new C1B().StrProp, ((I1)container.Get(typeof(I1), null)).StrProp);
     }
 
     /// <summary
@@ -83,10 +83,10 @@ namespace UIoC.Tests.Interface {
       IContainer container = new Container();
 
       container.AddType<I1, C1A>("A");
-      Assert.AreEqual(((I1)container.Get(typeof(I1), "A")).StrProp, new C1A().StrProp);
+      Assert.AreEqual(new C1A().StrProp, ((I1)container.Get(typeof(I1), "A")).StrProp);
 
       container.AddType<I1, C1B>("B");
-      Assert.AreEqual(((I1)container.Get(typeof(I1), "B")).StrProp, new C1B().StrProp);
+      Assert.AreEqual(new C1B().StrProp, ((I1)container.Get(typeof(I1), "B")).StrProp);
     }
 
     #endregion
@@ -153,18 +153,18 @@ namespace UIoC.Tests.Interface {
       Assert.IsNotNull(container.Get(typeof(I1), "A"));
       Assert.AreEqual(container.Get(typeof(I1), "A"), container.Get(typeof(I1), "A"));
 
-      Assert.AreEqual(((I1)container.Get(typeof(I1), "A")).StrProp, new C1A().StrProp);
+      Assert.AreEqual(new C1A().StrProp, ((I1)container.Get(typeof(I1), "A")).StrProp);
       ((I1)container.Get(typeof(I1), "A")).StrProp = "AAA";
-      Assert.AreEqual(((I1)container.Get(typeof(I1), "A")).StrProp, "AAA");
+      Assert.AreEqual("AAA", ((I1)container.Get(typeof(I1), "A")).StrProp);
 
 
       container.AddSingleton<I1, C1B>("B");
       Assert.IsNotNull(container.Get(typeof(I1), "B"));
       Assert.AreEqual(container.Get(typeof(I1), "B"), container.Get(typeof(I1), "B"));
 
-      Assert.AreEqual(((I1)container.Get(typeof(I1), "B")).StrProp, new C1B().StrProp);
+      Assert.AreEqual(new C1B().StrProp, ((I1)container.Get(typeof(I1), "B")).StrProp);
       ((I1)container.Get(typeof(I1), "B")).StrProp = "BBB";
-      Assert.AreEqual(((I1)container.Get(typeof(I1), "B")).StrProp, "BBB");
+      Assert.AreEqual("BBB", ((I1)container.Get(typeof(I1), "B")).StrProp);
 
 
       Assert.AreNotEqual(container.Get(typeof(I1), "A"), container.Get(typeof(I1), "B"));
@@ -273,7 +273,7 @@ namespace UIoC.Tests.Interface {
     public void AddFactoryTCFCO() {
       IContainer container = new Container();
       container.AddFactory<int>("name", (container) => 555);
-      Assert.AreEqual((int)container.Get(typeof(int), "name"), 555);
+      Assert.AreEqual(555, (int)container.Get(typeof(int), "name"));
     }
 
     /// <summary

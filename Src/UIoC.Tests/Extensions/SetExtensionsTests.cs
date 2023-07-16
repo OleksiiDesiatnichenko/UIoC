@@ -29,28 +29,28 @@ namespace UIoC.Tests.Interface {
 
       IContainer containerA = new Container();
       containerA.AddType(typeof(I1), null, typeof(C1A));
-      Assert.AreEqual(((I1)containerA.Get(typeof(I1), null)).StrProp, new C1A().StrProp);
+      Assert.AreEqual(new C1A().StrProp, ((I1)containerA.Get(typeof(I1), null)).StrProp);
 
       IContainer containerB = new Container();
       containerB.AddType(typeof(I2), null, typeof(C2A));
-      Assert.AreEqual(((I2)containerB.Get(typeof(I2), null)).StrProp, new C2A().StrProp);
+      Assert.AreEqual(new C2A().StrProp, ((I2)containerB.Get(typeof(I2), null)).StrProp);
 
 
       containerA.Merge(containerB);
 
-      Assert.AreEqual(((I1)containerA.Get(typeof(I1), null)).StrProp, new C1A().StrProp);
-      Assert.AreEqual(((I2)containerA.Get(typeof(I2), null)).StrProp, new C2A().StrProp);
+      Assert.AreEqual(new C1A().StrProp, ((I1)containerA.Get(typeof(I1), null)).StrProp);
+      Assert.AreEqual(new C2A().StrProp, ((I2)containerA.Get(typeof(I2), null)).StrProp);
 
 
       IContainer containerC = new Container();
       containerC.AddType(typeof(I2), null, typeof(C2B));
-      Assert.AreEqual(((I2)containerC.Get(typeof(I2), null)).StrProp, new C2B().StrProp);
+      Assert.AreEqual(new C2B().StrProp, ((I2)containerC.Get(typeof(I2), null)).StrProp);
 
 
       containerA.Merge(containerC);
 
-      Assert.AreEqual(((I1)containerA.Get(typeof(I1), null)).StrProp, new C1A().StrProp);
-      Assert.AreEqual(((I2)containerA.Get(typeof(I2), null)).StrProp, new C2B().StrProp);
+      Assert.AreEqual(new C1A().StrProp, ((I1)containerA.Get(typeof(I1), null)).StrProp);
+      Assert.AreEqual(new C2B().StrProp, ((I2)containerA.Get(typeof(I2), null)).StrProp);
     }
   }
 }

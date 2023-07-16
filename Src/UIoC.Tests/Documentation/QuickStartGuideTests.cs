@@ -66,7 +66,7 @@ namespace UIoC.Tests.Documentation {
       var myType = container.Get<IMyType>();
 
       Assert.IsNotNull(myType);
-      Assert.AreEqual(myType.GetType().FullName, typeof(MyType).FullName);
+      Assert.AreEqual(typeof(MyType).FullName, myType.GetType().FullName);
     }
 
     /// <summary>
@@ -85,9 +85,9 @@ namespace UIoC.Tests.Documentation {
       var myTypeB = container.Get<IMyType>("keyB");
 
       Assert.IsNotNull(myTypeA);
-      Assert.AreEqual(myTypeA.GetType().FullName, typeof(MyTypeA).FullName);
+      Assert.AreEqual(typeof(MyTypeA).FullName, myTypeA.GetType().FullName);
       Assert.IsNotNull(myTypeB);
-      Assert.AreEqual(myTypeB.GetType().FullName, typeof(MyTypeB).FullName);
+      Assert.AreEqual(typeof(MyTypeB).FullName, myTypeB.GetType().FullName);
     }
 
     /// <summary>
@@ -104,7 +104,7 @@ namespace UIoC.Tests.Documentation {
       var myType = container.Get<MyType>();
 
       Assert.IsNotNull(myType);
-      Assert.AreEqual(myType.GetType().FullName, typeof(MyType).FullName);
+      Assert.AreEqual(typeof(MyType).FullName, myType.GetType().FullName);
     }
 
     /// <summary>
@@ -121,8 +121,8 @@ namespace UIoC.Tests.Documentation {
       var myType = container.Get<IMyType>();
 
       Assert.IsNotNull(myType);
-      Assert.AreEqual(myType.GetType().FullName, typeof(MyType).FullName);
-      Assert.AreEqual(myType, container.Get<IMyType>());
+      Assert.AreEqual(typeof(MyType).FullName, myType.GetType().FullName);
+      Assert.AreEqual(container.Get<IMyType>(), myType);
     }
 
     /// <summary>
@@ -139,9 +139,9 @@ namespace UIoC.Tests.Documentation {
       var myType = container.Get<IMyType>();
 
       Assert.IsNotNull(myType);
-      Assert.AreEqual(myType.GetType().FullName, typeof(MyType).FullName);
-      Assert.AreEqual(myType.Text, "My Instance Type");
-      Assert.AreEqual(myType, container.Get<IMyType>());
+      Assert.AreEqual(typeof(MyType).FullName, myType.GetType().FullName);
+      Assert.AreEqual("My Instance Type", myType.Text);
+      Assert.AreEqual(container.Get<IMyType>(), myType);
     }
 
     /// <summary>
@@ -158,8 +158,8 @@ namespace UIoC.Tests.Documentation {
       var myType = container.Get<IMyType>();
 
       Assert.IsNotNull(myType);
-      Assert.AreEqual(myType.GetType().FullName, typeof(MyType).FullName);
-      Assert.AreEqual(myType.Text, "My Factory Produced Type");
+      Assert.AreEqual(typeof(MyType).FullName, myType.GetType().FullName);
+      Assert.AreEqual("My Factory Produced Type", myType.Text);
     }
 
     /// <summary>
@@ -177,9 +177,9 @@ namespace UIoC.Tests.Documentation {
       var myOuterTypeA = container.Get<MyOuterTypeA>();
 
       Assert.IsNotNull(myOuterTypeA);
-      Assert.AreEqual(myOuterTypeA.GetType().FullName, typeof(MyOuterTypeA).FullName);
+      Assert.AreEqual(typeof(MyOuterTypeA).FullName, myOuterTypeA.GetType().FullName);
       Assert.IsNotNull(myOuterTypeA.Obj);
-      Assert.AreEqual(myOuterTypeA.Obj.GetType().FullName, typeof(MyType).FullName);
+      Assert.AreEqual(typeof(MyType).FullName, myOuterTypeA.Obj.GetType().FullName);
     }
 
     /// <summary>
@@ -198,9 +198,9 @@ namespace UIoC.Tests.Documentation {
       var myOuterTypeB = container.Get<MyOuterTypeB>();
 
       Assert.IsNotNull(myOuterTypeB);
-      Assert.AreEqual(myOuterTypeB.GetType().FullName, typeof(MyOuterTypeB).FullName);
+      Assert.AreEqual(typeof(MyOuterTypeB).FullName, myOuterTypeB.GetType().FullName);
       Assert.IsNotNull(myOuterTypeB.Obj);
-      Assert.AreEqual(myOuterTypeB.Obj.GetType().FullName, typeof(MyTypeB).FullName);
+      Assert.AreEqual(typeof(MyTypeB).FullName, myOuterTypeB.Obj.GetType().FullName);
     }
 
     /// <summary>
@@ -214,7 +214,7 @@ namespace UIoC.Tests.Documentation {
       container.AddAllFromAssembly(Assembly.GetExecutingAssembly());
 
       Assert.IsNotNull(container.Get<MyType>());
-      Assert.AreEqual(container.Get<MyType>().GetType().FullName, typeof(MyType).FullName);
+      Assert.AreEqual(typeof(MyType).FullName, container.Get<MyType>().GetType().FullName);
     }
 
     /// <summary>
@@ -226,10 +226,10 @@ namespace UIoC.Tests.Documentation {
       container.AddAllFromAssembly(Assembly.GetExecutingAssembly());
 
       Assert.IsNotNull(container.Get<IMyType>());
-      Assert.AreEqual(container.Get<IMyType>().GetType().FullName, typeof(MyTypeC).FullName);
+      Assert.AreEqual(typeof(MyTypeC).FullName, container.Get<IMyType>().GetType().FullName);
 
       Assert.IsNotNull(container.Get<IMyType>("MySingleton"));
-      Assert.AreEqual(container.Get<IMyType>("MySingleton").GetType().FullName, typeof(MyTypeD).FullName);
+      Assert.AreEqual(typeof(MyTypeD).FullName, container.Get<IMyType>("MySingleton").GetType().FullName);
       Assert.AreEqual(container.Get<IMyType>("MySingleton"), container.Get<IMyType>("MySingleton"));
     }
 
@@ -247,9 +247,9 @@ namespace UIoC.Tests.Documentation {
       var myUnregstredType = container.Create<MyUnregstredType>();
 
       Assert.IsNotNull(myUnregstredType);
-      Assert.AreEqual(myUnregstredType.GetType().FullName, typeof(MyUnregstredType).FullName);
+      Assert.AreEqual(typeof(MyUnregstredType).FullName, myUnregstredType.GetType().FullName);
       Assert.IsNotNull(myUnregstredType.Obj);
-      Assert.AreEqual(myUnregstredType.Obj.GetType().FullName, typeof(MyType).FullName);
+      Assert.AreEqual(typeof(MyType).FullName, myUnregstredType.Obj.GetType().FullName);
     }
   }
 }

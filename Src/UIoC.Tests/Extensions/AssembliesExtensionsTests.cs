@@ -51,23 +51,23 @@ namespace UIoC.Tests.Interface {
 
       var c1A = (C1)container.Get(typeof(C1), null);
       Assert.IsNotNull(c1A);
-      Assert.AreEqual(c1A.IntProp, new C1().IntProp);
+      Assert.AreEqual(new C1().IntProp, c1A.IntProp);
 
       c1A.IntProp++;
-      Assert.AreEqual(c1A.IntProp, 1);
+      Assert.AreEqual(1, c1A.IntProp);
 
       var c1B = (C1)container.Get(typeof(C1), null);
       Assert.IsNotNull(c1B);
       Assert.AreNotEqual(c1A, c1B);
-      Assert.AreEqual(c1B.IntProp, 0);
+      Assert.AreEqual(0, c1B.IntProp);
 
 
       var c2 = (C2)container.Get(typeof(C2), null);
       Assert.IsNotNull(c2);
-      Assert.AreEqual(c2.IntProp, 0);
+      Assert.AreEqual(0, c2.IntProp);
 
       c2.IntProp++;
-      Assert.AreEqual(c2.IntProp, 1);
+      Assert.AreEqual(1, c2.IntProp);
     }
   }
 }

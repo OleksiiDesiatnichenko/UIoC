@@ -33,7 +33,7 @@ namespace UIoC.Tests.Functional {
 
       var c0 = container.Get(typeof(C0), null);
       Assert.IsNotNull(c0);
-      Assert.AreEqual(((C0)c0).Text, new C0().Text);
+      Assert.AreEqual(new C0().Text, ((C0)c0).Text);
     }
 
     [TestMethod]
@@ -67,7 +67,7 @@ namespace UIoC.Tests.Functional {
       c1.IntProp++;
       Assert.AreEqual(c1.IntProp, c2.IntProp);
 
-      Assert.AreEqual(c1.IntProp, container.Get<I2>().IntProp);
+      Assert.AreEqual(container.Get<I2>().IntProp, c1.IntProp);
     }
   }
 }
