@@ -27,7 +27,7 @@ namespace UIoC.Tests.Attributes {
     [TestMethod]
     public void DefaultParameters() {
       IContainer container = new Container();
-      container.AddFromAssembly(Assembly.GetExecutingAssembly());
+      container.AddByAttributeFromAssembly(Assembly.GetExecutingAssembly());
 
 
       var c1 = (I)container.Get(typeof(C1), null);
@@ -48,7 +48,7 @@ namespace UIoC.Tests.Attributes {
     [TestMethod]
     public void TypeParameters() {
       IContainer container = new Container();
-      container.AddFromAssembly(Assembly.GetExecutingAssembly());
+      container.AddByAttributeFromAssembly(Assembly.GetExecutingAssembly());
 
       var c2 = (I)container.Get(typeof(I), null);
       Assert.IsNotNull(c2);
@@ -58,7 +58,7 @@ namespace UIoC.Tests.Attributes {
     [TestMethod]
     public void NameParameters() {
       IContainer container = new Container();
-      container.AddFromAssembly(Assembly.GetExecutingAssembly());
+      container.AddByAttributeFromAssembly(Assembly.GetExecutingAssembly());
 
       var c3 = (I)container.Get(typeof(C3), "C3");
       Assert.IsNotNull(c3);

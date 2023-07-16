@@ -117,7 +117,7 @@ var myOuterTypeB = container.Get<MyOuterTypeB>();
 Inject all types of assembly
 ```cs
 // Inject all types from the current assembly
-container.AddAllTypesFromAssembly(Assembly.GetExecutingAssembly());
+container.AddAllFromAssembly(Assembly.GetExecutingAssembly());
 ```
 
 Specify resolve type and name for injection from assembly

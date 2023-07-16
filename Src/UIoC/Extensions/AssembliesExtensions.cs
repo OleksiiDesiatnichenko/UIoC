@@ -1,55 +1,72 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 
 namespace UIoC {
   public static class AssembliesExtensions {
 
-    #region Attributes
+    #region AddFromType
 
-    public static IContainer AddFromPath(this IContainer container, string path, string searchPattern = "*.dll", bool includeSubfolders = true) {
-      var files = Directory.GetFiles(path, searchPattern,
-        includeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
-      foreach (var file in files)
-        AddFromAssembly(container, Assembly.LoadFrom(file));
-      return container;
-    }
-
-    public static IContainer AddFromAssembly(this IContainer container, Assembly assembly) {
+    public static IContainer AddByAttribute(this IContainer container, Type type) {
       if (container == null) throw new ArgumentNullException(nameof(container));
-      foreach (var (attribute, type) in GetTypesWithAttribute(assembly, typeof(TypeAttribute)))
-        container.AddType(((TypeAttribute)attribute).ResolveType ?? type, ((TypeAttribute)attribute).ResolveName, type);
-      foreach (var (attribute, type) in GetTypesWithAttribute(assembly, typeof(SingletonAttribute)))
-        container.AddSingleton(((SingletonAttribute)attribute).ResolveType ?? type, ((SingletonAttribute)attribute).ResolveName, type);
+      type
+        .GetCustomAttributes(typeof(TypeAttribute), false)
+        .Cast<TypeAttribute>()
+        .ToList()
+        .ForEach(a => container.AddType(a.ResolveType ?? type, a.ResolveName, type));
+      type
+        .GetCustomAttributes(typeof(SingletonAttribute), false)
+        .Cast<SingletonAttribute>()
+        .ToList()
+        .ForEach(a => container.AddSingleton(a.ResolveType ?? type, a.ResolveName, type));
       return container;
     }
 
-    private static IEnumerable<(Attribute, Type)> GetTypesWithAttribute(Assembly assembly, Type attributeType) {
-      foreach (Type type in assembly.GetTypes())
-        foreach (var attributeInstance in type.GetCustomAttributes(attributeType, true))
-          yield return ((Attribute)attributeInstance, type);
+    public static IContainer AddByAttribute<TActual>(this IContainer container) {
+      return container.AddByAttribute(typeof(TActual));
     }
 
     #endregion
 
-    #region AllTypes
+    #region AddWithAttributes
 
-    public static IContainer AddAllTypesFromPath(this IContainer container, string path, string searchPattern = "*.dll", bool includeSubfolders = true) {
-      var files = Directory.GetFiles(path, searchPattern,
-        includeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
+    public static IContainer AddByAttributeFromPath(this IContainer container, string path, string searchPattern = "*.dll", bool includeSubfolders = true) {
+      if (path == null) throw new ArgumentNullException(nameof(path));
+      var files = Directory.GetFiles(path, searchPattern, includeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
       foreach (var file in files)
-        AddAllTypesFromAssembly(container, Assembly.LoadFrom(file));
+        AddByAttributeFromAssembly(container, Assembly.LoadFrom(file));
       return container;
     }
 
-    public static IContainer AddAllTypesFromAssembly(this IContainer container, Assembly assembly) {
+    public static IContainer AddByAttributeFromAssembly(this IContainer container, Assembly assembly) {
       if (container == null) throw new ArgumentNullException(nameof(container));
       foreach (Type type in assembly.GetTypes())
-        container.AddType(type);
+        container.AddByAttribute(type);
       return container;
     }
 
+    #endregion
+
+    #region AddAll
+
+    public static IContainer AddAllFromPath(this IContainer container, string path, string searchPattern = "*.dll", bool includeSubfolders = true) {
+      if (path == null) throw new ArgumentNullException(nameof(path));
+      var files = Directory.GetFiles(path, searchPattern, includeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
+      foreach (var file in files)
+        AddAllFromAssembly(container, Assembly.LoadFrom(file));
+      return container;
+    }
+
+    public static IContainer AddAllFromAssembly(this IContainer container, Assembly assembly) {
+      if (container == null) throw new ArgumentNullException(nameof(container));
+      foreach (Type type in assembly.GetTypes()) {
+        container.AddType(type);
+        container.AddByAttribute(type);
+      }
+      return container;
+    }
+    
     #endregion
   }
 }

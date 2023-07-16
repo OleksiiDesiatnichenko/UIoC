@@ -46,7 +46,7 @@ namespace UIoC.Tests.Interface {
     [TestMethod]
     public void AddAllTypesFromAssemblyCA() {
       var container = new Container();
-      container.AddAllTypesFromAssembly(Assembly.GetExecutingAssembly());
+      container.AddAllFromAssembly(Assembly.GetExecutingAssembly());
 
 
       var c1A = (C1)container.Get(typeof(C1), null);

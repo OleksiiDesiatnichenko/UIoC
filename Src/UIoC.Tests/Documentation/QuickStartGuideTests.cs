@@ -141,7 +141,7 @@ namespace UIoC.Tests.Documentation {
       Assert.IsNotNull(myType);
       Assert.AreEqual(myType.GetType().FullName, typeof(MyType).FullName);
       Assert.AreEqual(myType.Text, "My Instance Type");
-      Assert.ReferenceEquals(myType, container.Get<IMyType>());
+      Assert.AreEqual(myType, container.Get<IMyType>());
     }
 
     /// <summary>
@@ -211,7 +211,7 @@ namespace UIoC.Tests.Documentation {
       var container = new Container();
 
       // Inject all types from the current assembly
-      container.AddAllTypesFromAssembly(Assembly.GetExecutingAssembly());
+      container.AddAllFromAssembly(Assembly.GetExecutingAssembly());
 
       Assert.IsNotNull(container.Get<MyType>());
       Assert.AreEqual(container.Get<MyType>().GetType().FullName, typeof(MyType).FullName);
@@ -223,14 +223,14 @@ namespace UIoC.Tests.Documentation {
     [TestMethod]
     public void Example10() {
       var container = new Container();
-      container.AddAllTypesFromAssembly(Assembly.GetExecutingAssembly());
+      container.AddAllFromAssembly(Assembly.GetExecutingAssembly());
 
-      Assert.IsNotNull(container.Get<MyTypeC>());
-      Assert.AreEqual(container.Get<MyTypeC>().GetType().FullName, typeof(MyTypeC).FullName);
+      Assert.IsNotNull(container.Get<IMyType>());
+      Assert.AreEqual(container.Get<IMyType>().GetType().FullName, typeof(MyTypeC).FullName);
 
-      Assert.IsNotNull(container.Get<MyTypeD>());
-      Assert.AreEqual(container.Get<MyTypeD>().GetType().FullName, typeof(MyTypeD).FullName);
-      Assert.ReferenceEquals(container.Get<MyTypeD>(), container.Get<MyTypeD>());
+      Assert.IsNotNull(container.Get<IMyType>("MySingleton"));
+      Assert.AreEqual(container.Get<IMyType>("MySingleton").GetType().FullName, typeof(MyTypeD).FullName);
+      Assert.AreEqual(container.Get<IMyType>("MySingleton"), container.Get<IMyType>("MySingleton"));
     }
 
     /// <summary>
