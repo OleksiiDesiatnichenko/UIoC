@@ -100,7 +100,7 @@ class MyTypeA : IMyType { ... }
 class MyTypeB : IMyType { ... }
 
 class MyOuterTypeB { 
-  public MyOuterTypeB([ResolveName("keyB")]IMyType myType) { ... }
+  public MyOuterTypeB([Inject("keyB")]IMyType myType) { ... }
 }
 
 // Add types

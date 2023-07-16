@@ -32,7 +32,7 @@ namespace UIoC.Tests.Documentation {
 
     private class MyOuterTypeB {
       public object Obj { get; }
-      public MyOuterTypeB([ResolveName("keyB")] IMyType myType) => Obj = myType;
+      public MyOuterTypeB([Inject("keyB")] IMyType myType) => Obj = myType;
     }
 
     // Specify resolve type

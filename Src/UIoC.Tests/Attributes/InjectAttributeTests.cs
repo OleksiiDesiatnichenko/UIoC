@@ -2,7 +2,7 @@
 
 namespace UIoC.Tests.Attributes {
   [TestClass]
-  public class ResolveNameAttributeTests {
+  public class InjectAttributeTests {
 
     private interface I1 {
       public string StrProp { get; }
@@ -16,7 +16,7 @@ namespace UIoC.Tests.Attributes {
 
     private class C2 {
       internal I1 _i1;
-      public C2([ResolveName("C1B")] I1 i1) { _i1 = i1; }
+      public C2([Inject("C1B")] I1 i1) { _i1 = i1; }
       public string StrProp => _i1.StrProp;
     }
 
