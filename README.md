@@ -131,6 +131,9 @@ class MyTypeC : IMyType { ... }
 // Specify resolve type and resolve name
 [Singleton(typeof(IMyType), "MySingleton")] 
 class MyTypeD : IMyType { ... }
+
+// Load only types with attributes
+container.AddByAttributeFromAssembly(Assembly.GetExecutingAssembly());
 ```
 
 ### Create type without registration

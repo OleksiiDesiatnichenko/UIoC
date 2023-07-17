@@ -223,7 +223,9 @@ namespace UIoC.Tests.Documentation {
     [TestMethod]
     public void Example10() {
       var container = new Container();
-      container.AddAllFromAssembly(Assembly.GetExecutingAssembly());
+
+      // Load only types with attributes
+      container.AddByAttributeFromAssembly(Assembly.GetExecutingAssembly());
 
       Assert.IsNotNull(container.Get<IMyType>());
       Assert.AreEqual(typeof(MyTypeC).FullName, container.Get<IMyType>().GetType().FullName);
