@@ -101,13 +101,13 @@ namespace UIoC {
 
     public static bool TryGet<TResolve>(this IContainer container, out TResolve value) {
       if (container == null) throw new ArgumentNullException(nameof(container));
-      if (container.Contains(typeof(TResolve), null)) { value = default; return false; }
+      if (!container.Contains(typeof(TResolve), null)) { value = default; return false; }
       value = (TResolve)container.Get(typeof(TResolve), null);
       return true;
     }
     public static bool TryGet<TResolve>(this IContainer container, string resolveName, out TResolve value) {
       if (container == null) throw new ArgumentNullException(nameof(container));
-      if (container.Contains(typeof(TResolve), resolveName)) { value = default; return false; }
+      if (!container.Contains(typeof(TResolve), resolveName)) { value = default; return false; }
       value = (TResolve)container.Get(typeof(TResolve), resolveName);
       return true;
     }

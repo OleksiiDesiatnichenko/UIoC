@@ -15,6 +15,10 @@ namespace UIoC.Tests.Interface {
       public string StrProp => "C1B";
     }
 
+    private interface I2 {
+      public string StrProp { get; }
+    }
+
     #region TryAddType
 
     /// <summary
@@ -141,7 +145,16 @@ namespace UIoC.Tests.Interface {
     /// </summary>
     [TestMethod]
     public void TryGetTCT() {
-      // TODO
+      IContainer container = new Container();
+
+      container.AddType<I1, C1A>();
+      if (container.TryGet<I1>(out I1 i1)) {
+      Assert.AreEqual(new C1A().StrProp, i1.StrProp);
+      }
+
+      if (container.TryGet<I2>(out I2 i2)) {
+        Assert.Fail();
+      }
     }
 
     /// <summary
@@ -149,7 +162,16 @@ namespace UIoC.Tests.Interface {
     /// </summary>
     [TestMethod]
     public void TryGetTCST() {
-      // TODO
+      IContainer container = new Container();
+
+      container.AddType<I1, C1A>("keyA");
+      if (container.TryGet<I1>("keyA", out I1 i1)) {
+        Assert.AreEqual(new C1A().StrProp, i1.StrProp);
+      }
+
+      if (container.TryGet<I2>("keyB", out I2 i2)) {
+        Assert.Fail();
+      }
     }
 
     #endregion
