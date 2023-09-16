@@ -148,11 +148,11 @@ namespace UIoC.Tests.Interface {
       IContainer container = new Container();
 
       container.AddType<I1, C1A>();
-      if (container.TryGet<I1>(out I1 i1)) {
-      Assert.AreEqual(new C1A().StrProp, i1.StrProp);
+      if (container.TryGet<I1>(out var i1)) {
+        Assert.AreEqual(new C1A().StrProp, i1.StrProp);
       }
 
-      if (container.TryGet<I2>(out I2 i2)) {
+      if (container.TryGet<I2>(out var i2)) {
         Assert.Fail();
       }
     }
@@ -165,11 +165,11 @@ namespace UIoC.Tests.Interface {
       IContainer container = new Container();
 
       container.AddType<I1, C1A>("keyA");
-      if (container.TryGet<I1>("keyA", out I1 i1)) {
+      if (container.TryGet<I1>("keyA", out var i1)) {
         Assert.AreEqual(new C1A().StrProp, i1.StrProp);
       }
 
-      if (container.TryGet<I2>("keyB", out I2 i2)) {
+      if (container.TryGet<I2>("keyB", out var i2)) {
         Assert.Fail();
       }
     }
