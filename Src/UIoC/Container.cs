@@ -9,6 +9,10 @@ namespace UIoC {
 
     #region Add
 
+    public Container() {
+      Add(new InstanceModel(typeof(IContainer), null, this));
+    }
+
     public IContainer AddType(Type resolveType, string resolveName, Type actualType) {
       if (actualType == null) throw new ArgumentNullException(nameof(actualType));
       Add(new TypeModel(resolveType, resolveName, actualType));
