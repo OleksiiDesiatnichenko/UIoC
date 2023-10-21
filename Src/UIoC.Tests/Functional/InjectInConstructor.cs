@@ -22,8 +22,8 @@ namespace UIoC.Tests.Functional {
     }
     private class C2 : I2 {
       private I1 _i1;
-      public C2(I1 i1) { _i1 = i1; }
-      public int IntProp { get => _i1.IntProp; set => _i1.IntProp = value; }
+      public C2(I1 i1 = null) { _i1 = i1; }
+      public int IntProp { get => _i1?.IntProp ?? int.MinValue; set => _i1.IntProp = value; }
     }
 
     public void DefaultConstructorParameter() {
@@ -68,6 +68,21 @@ namespace UIoC.Tests.Functional {
       Assert.AreEqual(c1.IntProp, c2.IntProp);
 
       Assert.AreEqual(container.Get<I2>().IntProp, c1.IntProp);
+    }
+
+    [TestMethod]
+    public void DefaultConstructorTypeParameter() {
+      IContainer container = new Container();
+
+      container.AddType<I2, C2>();
+
+      var c2a = container.Get<I2>();
+      Assert.AreEqual(int.MinValue, c2a.IntProp);
+
+      container.AddSingleton<I1, C1>();
+
+      var c2b = container.Get<I2>();
+      Assert.AreEqual(container.Get<I2>().IntProp, c2b.IntProp);
     }
   }
 }
