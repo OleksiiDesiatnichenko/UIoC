@@ -2,6 +2,8 @@
 
 The UIoC is a simple and lightweight inversion of control dependency injection container with basic functionality and predicted behavior for the .NET Framework.
 
+[![Nuget](https://img.shields.io/nuget/v/UIoC)](https://www.nuget.org/packages/UIoC)
+
 ## Installation
 
 Install UIoC using Package Manager with the `Install-Package UIoC` command or get it from the [NuGet.org](https://www.nuget.org/packages/UIoC).
