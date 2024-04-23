@@ -2,7 +2,8 @@
 
 The UIoC is a simple and lightweight inversion of control dependency injection container with basic functionality and predicted behavior for the .NET Framework.
 
-[![License](https://img.shields.io/github/license/olekdes/uioc.svg)](https://github.com/olekdes/uioc/blob/master/LICENSE)
+[![NET](https://img.shields.io/badge/.NET-512bd4)](https://github.com/microsoft/dotnet)
+[![License](https://img.shields.io/github/license/olekdes/otreeview.svg)](https://github.com/olekdes/uioc/blob/master/LICENSE.txt)
 [![Nuget](https://img.shields.io/nuget/v/UIoC)](https://www.nuget.org/packages/UIoC)
 [![NuGet](https://img.shields.io/nuget/dt/UIoC.svg)](https://www.nuget.org/packages/UIoC)
 
