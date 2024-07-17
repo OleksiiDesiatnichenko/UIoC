@@ -91,10 +91,10 @@ namespace UIoC {
             .Select(p => {
               var attribute = p.GetCustomAttributes(typeof(InjectAttribute), false).FirstOrDefault() as InjectAttribute;
               var resolveType = attribute?.ResolveType ?? p.ParameterType;
-              var resolvename = attribute?.ResolveName;
-              if (p.HasDefaultValue && !Contains(resolveType, resolvename))
+              var resolveName = attribute?.ResolveName;
+              if (p.HasDefaultValue && !Contains(resolveType, resolveName))
                 return p.DefaultValue;
-              return Get(resolveType, resolvename);
+              return Get(resolveType, resolveName);
             })
             .ToArray();
           return ctor.Invoke(parameters);
